@@ -1,4 +1,5 @@
 require 'rest_client'
+require 'base64'
 
 module Sisecommerce
   class Request
@@ -26,12 +27,16 @@ module Sisecommerce
 
     def self.default_headers
       {
-        authorization: 'Basic ' + "#{Sisecommerce.store_name}:#{Sisecommerce.api_token}",
+        authorization: "Basic #{authorization}",
         accept: 'application/json',
         accept_charset: 'utf-8',
         accept_language: 'pt-br;q=0.9,pt-BR',
         content_type: 'application/json; charset=utf-8'
       }
+    end
+
+    def self.authorization
+      Base64.encode64("#{Sisecommerce.store_name}:#{Sisecommerce.api_token}").gsub("\n", "")
     end
 
   end
