@@ -1,8 +1,8 @@
 module Sisecommerce
-  module APIAll
+  module APIFind
     module ClassMethods
-      def all(page = 1)
-        Request.send_request('GET', self.url, {page: page})
+      def find(id)
+        Request.send_request('GET', self.url, {id: id})
       end
     end
 

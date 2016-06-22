@@ -6,7 +6,7 @@ RSpec.describe 'Sisecommerce::Clientes' do
       is_expected.to_not be nil
     end
 
-    xit 'should return Cliente instances' do
+    it 'should return Cliente instances' do
       expect(subject.first).to be_a Cliente
     end
   end
@@ -14,7 +14,7 @@ RSpec.describe 'Sisecommerce::Clientes' do
   describe '#find' do
     subject { clientes = Sisecommerce::Cliente.find(10) }
 
-    xit 'should list cliente with id 10' do
+    it 'should list cliente with id 10' do
       is_expected.to_not be nil
     end
   end

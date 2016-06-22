@@ -2,16 +2,23 @@ require 'rest_client'
 
 module Sisecommerce
   class Request
-    def self.send(method, url, data = {})
+    def self.send_request(method, url, data = {})
       p build_request(method, url, data)
+      validate_user_data
       RestClient::Request.execute build_request(method, url, data)
+    end
+
+    def self.validate_user_data
+      unless Sisecommerce.api_token && Sisecommerce.store_name
+        raise "API Token and Store name not given. Please, set Sisecommerce.api_token and Sisecommerce.store_name before sending requests."
+      end
     end
 
     def self.build_request(method, url, data)
       {
         headers: default_headers,
         method: method,
-        payload: data.to_json,
+        payload: data,
         url: url,
         timeout: 30
       }
