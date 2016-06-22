@@ -20,10 +20,10 @@ RSpec.describe 'Sisecommerce::Clientes' do
   end
 
   describe '#update' do
-    let(:cliente) { Sisecommerce::Cliente.find(10) }
+    let(:cliente) { Sisecommerce::Cliente.update(10, nome: 'new name') }
 
-    xit 'should change cliente nome' do
-      is_expected.to_not be
+    it 'should change cliente nome' do
+      is_expected.to_not be nil
     end
   end
 

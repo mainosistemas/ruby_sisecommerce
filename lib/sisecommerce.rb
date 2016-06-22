@@ -1,6 +1,7 @@
 require_relative 'sisecommerce/request'
 require_relative 'sisecommerce/api_all'
 require_relative 'sisecommerce/api_find'
+require_relative 'sisecommerce/api_update'
 require_relative 'sisecommerce/cliente'
 
 module Sisecommerce
