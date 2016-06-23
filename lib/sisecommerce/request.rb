@@ -4,7 +4,7 @@ require 'json'
 
 module Sisecommerce
   class Request
-    def self.send_request(method, resource_name, data = {})
+    def self.send_request(method, resource_name, data)
       validate_user_data
       request = RestClient::Request.execute(build_request(method, resource_name, data))
       handle_response request, resource_name
@@ -33,21 +33,21 @@ module Sisecommerce
 
     def self.build_request(method, resource_name, data)
       {
-        headers: default_headers,
+        headers: default_headers(data),
         method: method,
-        payload: data,
         url: url(resource_name),
         timeout: 30
       }
     end
 
-    def self.default_headers
+    def self.default_headers(data)
       {
         authorization: "Basic #{authorization}",
         accept: 'application/json',
         accept_charset: 'utf-8',
         accept_language: 'pt-br;q=0.9,pt-BR',
-        content_type: 'application/json; charset=utf-8'
+        content_type: 'application/json; charset=utf-8',
+        params: data
       }
     end
 
