@@ -1,8 +1,8 @@
 module Sisecommerce
-  module APIUpdate
+  module APIGet
     module ClassMethods
-      def update(data = {})
-        Request.send_request('PUT', "#{resource_name}s", {data: data})
+      def get(data = nil)
+        Request.send_request('GET', "#{resource_name}s", {data: data}) if data.is_a? Hash
       end
     end
 

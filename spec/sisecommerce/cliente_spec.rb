@@ -1,34 +1,37 @@
 RSpec.describe Sisecommerce::Cliente do
-  describe '#all' do
-    subject { clientes = Sisecommerce::Cliente.all }
-
+  describe '#get' do
     context 'having 10 clientes available' do
+      it 'returns cliente with id 1' do
+        clientes = Sisecommerce::Cliente.get(id: 1)
+        expect(clientes.first.id).to eq 1
+      end
+
       it 'lists clientes available' do
-        expect(subject.size).to eq 10
+        clientes = Sisecommerce::Cliente.get
+        expect(clientes.size).to eq 10
+      end
+
+      it 'lists clientes available by pagina' do
+        clientes = Sisecommerce::Cliente.get(pagina: 1)
+        expect(clientes.size).to eq 10
+      end
+
+      it 'lists clientes between data_cadastro' do
+        clientes = Sisecommerce::Cliente.get(data_cadastro: '20160101-20160105')
+        expect(clientes.size).to eq 10
+      end
+
+      it 'lists clientes by tipo_pessoa' do
+        clientes = Sisecommerce::Cliente.get(tipo_pessoa: 'F')
+        expect(clientes.size).to eq 10
       end
     end
 
     context 'having no clientes available' do
       it 'returns error 220' do
-        expect(subject.first.codigo).to eq 220
+        retorno = Sisecommerce::Cliente.get
+        expect(retorno.first.codigo).to eq 220
       end
-    end
-
-  end
-
-  describe '#find' do
-    subject { clientes = Sisecommerce::Cliente.find(10) }
-
-    it 'should list cliente with id 10' do
-      expect(subject.first.id).to eq 10
-    end
-  end
-
-  describe '#update' do
-    let(:cliente) { Sisecommerce::Cliente.update(10, nome: 'new name') }
-
-    it 'should change cliente nome' do
-      expect(subject.first.nome).to eq 'new name'
     end
   end
 

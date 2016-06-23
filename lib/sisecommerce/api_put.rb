@@ -1,8 +1,8 @@
 module Sisecommerce
-  module APIAll
+  module APIPut
     module ClassMethods
-      def all(page = 1)
-        Request.send_request('GET', "#{resource_name}s", {page: page})
+      def put(data = nil)
+        Request.send_request('PUT', "#{resource_name}s", {data: data}) if data.is_a? Hash
       end
     end
 
