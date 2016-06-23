@@ -2,7 +2,7 @@ module Sisecommerce
   module APIFind
     module ClassMethods
       def find(id)
-        Request.send_request('GET', self.url, {id: id})
+        Request.send_request('GET', "#{resource_name}s", {id: id})
       end
     end
 

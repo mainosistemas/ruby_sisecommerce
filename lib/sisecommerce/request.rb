@@ -1,12 +1,13 @@
 require 'rest_client'
 require 'base64'
+require 'json'
 
 module Sisecommerce
   class Request
-    def self.send_request(method, url, data = {})
-      p build_request(method, url, data)
+    def self.send_request(method, resource_name, data = {})
       validate_user_data
-      RestClient::Request.execute build_request(method, url, data)
+      request = RestClient::Request.execute(build_request(method, resource_name, data))
+      handle_response request, resource_name
     end
 
     def self.validate_user_data
@@ -15,12 +16,27 @@ module Sisecommerce
       end
     end
 
-    def self.build_request(method, url, data)
+    def self.url(resource_name)
+      "#{Sisecommerce.base_uri}#{resource_name}"
+    end
+
+    def self.handle_response(response, resource_name)
+      json_response = JSON.parse(response, object_class: OpenStruct)
+      if json_response.retorno
+        json_response.retorno
+      else
+        json_response.send(resource_name)
+      end
+    rescue JSON::ParserError
+      raise RequestFailed
+    end
+
+    def self.build_request(method, resource_name, data)
       {
         headers: default_headers,
         method: method,
         payload: data,
-        url: url,
+        url: url(resource_name),
         timeout: 30
       }
     end

@@ -1,8 +1,8 @@
 module Sisecommerce
-  module APIAll
+  module APIResource
     module ClassMethods
-      def all(page = 1)
-        Request.send_request('GET', "#{resource_name}s", {page: page})
+      def resource_name
+        name.split('::').last.downcase
       end
     end
 
