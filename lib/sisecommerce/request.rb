@@ -21,12 +21,7 @@ module Sisecommerce
     end
 
     def self.handle_response(response, resource_name)
-      json_response = JSON.parse(response, object_class: OpenStruct)
-      if json_response.retorno
-        json_response.retorno
-      else
-        json_response.send(resource_name)
-      end
+      JSON.parse(response, object_class: OpenStruct)      
     rescue JSON::ParserError
       raise RequestFailed
     end
