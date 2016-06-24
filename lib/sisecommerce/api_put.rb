@@ -3,7 +3,7 @@ module Sisecommerce
     module ClassMethods
       def put(data = nil)
         data ||= {}
-        Request.send_request('PUT', "#{resource_name}s", {data: data}) if data.is_a? Hash
+        Request.send_request('PUT', "#{resource_name_pluralized}", {data: data}) if data.is_a? Hash
       end
     end
 

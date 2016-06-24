@@ -34,4 +34,18 @@ RSpec.describe Sisecommerce::Pedido, :vcr do
       end
     end
   end
+
+  describe '#total_page' do
+    it 'returns the total page number' do
+      resposta = Sisecommerce::Pedido.total_page
+      expect(resposta).to eq 2
+    end
+  end
+
+  describe '#get_last' do
+    it 'returns the last pedido created' do
+      resposta = Sisecommerce::Pedido.get_last
+      expect(resposta.pedidos.)
+    end
+  end
 end
