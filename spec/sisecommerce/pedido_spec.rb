@@ -16,6 +16,11 @@ RSpec.describe Sisecommerce::Pedido, :vcr do
         expect(pedidos.first.data).to include '2016-02-03'
       end
 
+      it 'lists pedidos available by pagina' do
+        pedidos = Sisecommerce::Pedido.get(pagina: 1)
+        expect(pedidos.size).to eq 10
+      end
+
       it 'lists pedidos by status' do
         pedidos = Sisecommerce::Pedido.get(status: 200)
         expect(pedidos.first.status_codigo).to eq 200
