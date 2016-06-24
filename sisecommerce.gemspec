@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "Ruby API for Sisecommerce platform"
   s.authors     = ["Iuri Madeira"]
   s.email       = 'iurimadeira@gmail.com'
-  s.files       = ["lib/ruby_sisecommerce.rb"]
+  s.files       = ["lib/sisecommerce.rb"]
   s.homepage    = 'http://rubygems.org/gems/ruby_sisecommerce'
   s.license     = 'MIT'
 
