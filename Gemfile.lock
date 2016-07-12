@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-sisecommerce (0.0.0)
+    ruby-sisecommerce (0.0.1)
       rest-client
 
 GEM
