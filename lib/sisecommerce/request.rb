@@ -21,7 +21,7 @@ module Sisecommerce
     end
 
     def self.handle_response(response, resource_name)
-      JSON.parse(response, object_class: OpenStruct)      
+      JSON.parse(response, object_class: OpenStruct)
     rescue JSON::ParserError
       raise RequestFailed
     end
@@ -35,15 +35,26 @@ module Sisecommerce
       }
     end
 
-    def self.default_headers(data)
-      {
-        authorization: "Basic #{authorization}",
-        accept: 'application/json',
-        accept_charset: 'utf-8',
-        accept_language: 'pt-br;q=0.9,pt-BR',
-        content_type: 'application/json; charset=utf-8',
-        params: data
-      }
+    def self.default_headers(method, data)
+      if method == "PUT" || method == "POST"
+        {
+          authorization: "Basic #{authorization}",
+          accept: 'application/json',
+          accept_charset: 'utf-8',
+          accept_language: 'pt-br;q=0.9,pt-BR',
+          content_type: 'application/json; charset=utf-8',
+          body: data
+        }
+      else
+        {
+          authorization: "Basic #{authorization}",
+          accept: 'application/json',
+          accept_charset: 'utf-8',
+          accept_language: 'pt-br;q=0.9,pt-BR',
+          content_type: 'application/json; charset=utf-8',
+          params: data
+        }
+      end
     end
 
     def self.authorization

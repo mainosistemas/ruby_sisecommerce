@@ -31,9 +31,9 @@ RSpec.describe Sisecommerce::Produto do
   end
 
   describe '#put' do
-    it 'should change produto nome' do
-      Sisecommerce::Produto.put(id_sku: 1, nome: 'new name')
-      expect(Sisecommerce::Produto.get(id_sku: 1).nome).to eq 'new name'
+    it 'should change produto qtd to 10' do
+      Sisecommerce::Produto.put(id_sku: 1, qtd: 10)
+      expect(Sisecommerce::Produto.get(id_sku: 1).qtd).to eq 10
     end
   end
 
