@@ -27,12 +27,22 @@ module Sisecommerce
     end
 
     def self.build_request(method, resource_name, data)
-      {
-        headers: default_headers(data),
-        method: method,
-        url: url(resource_name),
-        timeout: 30
-      }
+      if method == "PUT" || method == "POST"
+        {
+          headers: default_headers(method, data),
+          method: method,
+          payload: data.to_json,
+          url: url(resource_name),
+          timeout: 30
+        }
+      else
+        {
+          headers: default_headers(method, data),
+          method: method,
+          url: url(resource_name),
+          timeout: 30
+        }
+      end
     end
 
     def self.default_headers(method, data)
@@ -42,8 +52,7 @@ module Sisecommerce
           accept: 'application/json',
           accept_charset: 'utf-8',
           accept_language: 'pt-br;q=0.9,pt-BR',
-          content_type: 'application/json; charset=utf-8',
-          body: data
+          content_type: 'application/json; charset=utf-8'
         }
       else
         {
