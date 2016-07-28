@@ -1,9 +1,9 @@
 module Sisecommerce
   module APIGet
     module ClassMethods
-      def get(data = nil)
+      def get(store_name, api_token, data = nil)
         data ||= {}
-        Request.send_request('GET', "#{resource_name_pluralized}", data) if data.is_a? Hash
+        Request.send_request('GET', store_name, api_token, "#{resource_name_pluralized}", data) if data.is_a? Hash
       end
 
       def total_page
