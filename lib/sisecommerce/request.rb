@@ -3,6 +3,8 @@ require 'base64'
 require 'json'
 
 module Sisecommerce
+  class RequestFailed < StandardError;end
+
   class Request
     def self.send_request(method, store_name, api_token, resource_name, data)
       validate_user_data(store_name, api_token)
